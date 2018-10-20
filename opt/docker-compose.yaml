@@ -1,0 +1,127 @@
+version: '2.1'
+
+services:
+  homeassistant:
+    container_name: homeassistant
+    image: homeassistant/home-assistant
+    network_mode: "host"
+    volumes:
+      - /opt/docker/homeassistant:/config
+      - /etc/localtime:/etc/localtime:ro
+    restart: on-failure
+    # depends_on:
+      # mosquitto:
+        # condition: service_started
+    # healthcheck:
+      # test: ["CMD", "curl", "-f", "http://127.0.0.1:8123"]
+      # interval: 30s
+      # timeout: 10s
+      # retries: 6
+      
+  mosquitto:
+    container_name: mosquitto
+    image: eclipse-mosquitto
+    ports:
+      - 1883:1883
+    volumes:
+      - /opt/docker/mosquitto:/mosquitto/config
+      - /opt/docker/mosquitto:/mosquitto/data
+      - /opt/docker/mosquitto:/mosquitto/log
+      - /opt/docker/mosquitto:/mosquitto/passwd
+    restart: on-failure
+
+  portainer:
+    container_name: portainer
+    image: portainer/portainer:develop
+    command: -H unix:///var/run/docker.sock
+    ports:
+      - 9000:9000
+    volumes:
+      - /opt/docker/portainer:/data:rw
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: "no" # because the exit code(s) are wrong
+
+  dockermon:
+    container_name: dockermon
+    image: philhawthorne/ha-dockermon
+    ports:
+      - 8126:8126
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /opt/docker/dockermon:/config
+    restart: on-failure
+
+  # unifi:
+    # container_name: unifi
+    # image: jacobalberty/unifi
+    # restart: always
+    # volumes:
+      # - './data/lib:/opt/unifi'
+      # - './data/log:/opt/unifi'
+      # - './data/run:/opt/unifi'
+    # ports:
+      # - '3478:3478/udp'
+      # - '10001:10001/udp'
+      # - '6789:6789/tcp'
+      # - '8080:8080/tcp'
+      # - '8880:8880/tcp'
+      # - '8443:8443/tcp'
+      # - '8843:8843/tcp'
+    # environment:
+      # - TZ=Africa/Harare
+    # labels:
+      # - 'unifi-controller'
+      
+  # softether:
+    # container_name: softether
+    # image: siomiz/softethervpn
+    # restart: always
+    # volumes:
+      # - /opt/softether/vpn_server.config:/usr/vpnserver/vpn_server.config
+    # cap_add:
+      # - NET_ADMIN
+    # ports:
+      # - 500:500/udp
+      # - 4500:4500/udp
+      # - 1701:1701/tcp
+      # - 1194:1194/udp
+      # - 5555:5555/tcp
+
+  # roomassistant:
+    # container_name: room-assistant
+    # image: mkerix/room-assistant
+    # restart: always
+    # network_mode: host
+    # environment:
+      # SERVICES: 'ble,console'
+      # ROOM: 'docker-room'
+      # MQTT_URL: 'mqtt://localhost'
+      # MQTT_USERNAME: 'admin'
+      # MQTT_PASSWORD: 'admin'
+      # MQTT_REJECT_UNAUTHORIZED: 'true'
+    
+  # appdaemon:
+    # container_name: appdaemon
+    # image: acockburn/appdaemon:latest
+    # environment:
+      # HA_URL: "http://192.168.1.38:8123"
+      # HA_KEY: ""
+      # DASH_URL: "http://appdaemon:5010"
+    # volumes:
+      # - /etc/localtime:/etc/localtime
+      # - /opt/docker/appdaemon/config:/conf
+    # ports:
+      # - 5010:5010
+    # depends_on:
+      # - homeassistant
+    # restart: always    
+
+  # plex:
+    # container_name: plex
+    # image: plexinc/pms-docker
+    # restart: unless-stopped
+    # network_mode: host
+    # volumes:
+      # - /opt/docker/plex:/config
+      # - /opt/docker/transcode:/transcode
+      # - /opt/docker/storage:/data
