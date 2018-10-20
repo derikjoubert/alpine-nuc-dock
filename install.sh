@@ -1,10 +1,11 @@
 #!/bin/sh
 
-apk add samba samba-common-tools
+cp /alpine-nuc-docker/repositories /etc/apk/repositories
 mv opt/ ..
 chmod 0777 /opt
+apk update
+apk add samba samba-common-tools
 cp /opt/samba/smb.conf /etc/samba/smb.conf
-rm -rf alpine-nuc-dock
 # adduser admin
 #smbpasswd
 (echo password; echo password) | smbpasswd -a
@@ -16,4 +17,6 @@ service docker start
 apk add py-pip
 pip install docker-compose
 
-
+cd opt/
+chmod +x cleanup.sh
+bash cleanup.sh
