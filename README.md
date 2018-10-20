@@ -1,13 +1,10 @@
 # Alpine Docker Setup
 
-Basic Prep for Docker + Compose + Samba Share
+Basic Prep for Docker + Compose + Samba Share.
 
 ## Getting Started
 
-Create Alpine installer disk
-Login with "root" no password
-Run setup with "setup-alpine"
-Reboot
+Create Alpine installer disk, login with "root" no password, run setup with "setup-alpine", reboot.
 
 ### Prerequisites
 
@@ -15,7 +12,6 @@ Install Nano, Bash and Git
 
 ```
 apk add nano bash git
-
 ```
 
 Edit SSH settings
