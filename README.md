@@ -45,7 +45,7 @@ cd /alpine-nuc-docker/opt
 Make install.sh executable
 
 ```
-chmod x+y install.sh
+chmod +x install.sh
 ```
 
 Run install.sh
