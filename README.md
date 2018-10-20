@@ -33,7 +33,7 @@ service sshd restart
 Clone Repo to root directory
 
 ```
-wget https://github.com/derikjoubert/alpine-nuc-docker/archive/master.zip
+git clone https://github.com/derikjoubert/alpine-nuc-docker/opt.git
 ```
 
 cd to directory
