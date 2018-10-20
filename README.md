@@ -33,7 +33,7 @@ service sshd restart
 Clone Repo to root directory
 
 ```
-git clone https://github.com/derikjoubert/alpine-nuc-docker/opt.git
+git clone https://github.com/derikjoubert/alpine-nuc-docker.git
 ```
 
 cd to directory
