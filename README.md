@@ -39,7 +39,7 @@ git clone https://github.com/derikjoubert/alpine-nuc-docker.git
 cd to opt directory
 
 ```
-cd /alpine-nuc-docker/opt
+cd /alpine-nuc-docker
 ```
 
 Make install.sh executable
