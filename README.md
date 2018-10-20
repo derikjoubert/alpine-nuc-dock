@@ -4,7 +4,7 @@ Basic Prep for Docker + Compose + Samba Share.
 
 ## Getting Started
 
-Create Alpine installer disk, login with "root" no password, run setup with "setup-alpine", reboot.
+Boot Alpine installer disk, login with "root" no password, run setup with "setup-alpine", reboot.
 
 ### Prerequisites
 
@@ -30,16 +30,28 @@ service sshd restart
 
 ### Installing
 
+Clone Repo to root directory
+
+```
+wget https://github.com/derikjoubert/alpine-nuc-docker/archive/master.zip
+```
+
+cd to directory
+
+```
+cd alpine-nuc-docker
+```
+
 Make install.sh executable
 
 ```
 chmod x+y install.sh
 ```
 
-And repeat
+Run install.sh
 
 ```
-until finished
+bash install.sh
 ```
 
 End with an example of getting some data out of the system or using it for a little demo
