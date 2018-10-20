@@ -36,10 +36,10 @@ Clone Repo to root directory
 git clone https://github.com/derikjoubert/alpine-nuc-docker.git
 ```
 
-cd to directory
+cd to opt directory
 
 ```
-cd alpine-nuc-docker
+cd /alpine-nuc-docker/opt
 ```
 
 Make install.sh executable
